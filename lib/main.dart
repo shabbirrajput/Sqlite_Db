@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -39,19 +40,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _incrementCounter() async {
     counter = '';
+
+    // await db.execute(
+    //   "CREATE TABLE Models(id INTEGER PRIMARY KEY, fruitName TEXT, quantity TEXT)",
+    // );
+
     // await db
     //     .execute(
-    //         'INSERT INTO Test(name, value, num) VALUES("some name 1", 12345, 456.7893)')
+    //         "INSERT INTO Models(id, fruitName, quantity) VALUES(7,'Watermelon','15' )")
     //     .then((value) {
     //   print('object--------------------');
     // });
 
-    await db.rawQuery('SELECT * FROM Test').then((value) {
+    await db.rawQuery('SELECT * FROM Models').then((value) {
       value.forEach((element) {
-        print("element['name']=================${element['name']}");
-        print("element['value']=================${element['value']}");
+        print("element['id'] =================> ${element['id']}");
+        print(
+            "element['fruitName'] =================> ${element['fruitName']}");
+        print("element['quantity'] =================> ${element['quantity']}");
       });
-      /*print('object--------------------${jsonEncode(value.first)}');
+/*      print('object--------------------${jsonEncode(value.first)}');
 
       ModelTestResponse modelTestResponse =
           ModelTestResponse.fromMap(value.first);
